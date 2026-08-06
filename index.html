@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LQSTC — Internal Systems</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0E141B;
-    --surface: #161F29;
-    --surface-hover: #1C2733;
-    --line: #263241;
-    --text: #E6EAEF;
-    --muted: #7C8998;
-    --accent: #5FC9BA;
-    --accent-dim: #3A6E67;
-    --amber: #E0A458;
-    --amber-dim: #6B5432;
+    --bg: #FFFFFF;
+    --surface: #F4FAF6;
+    --surface-hover: #EAF6EF;
+    --line: #DCEAE1;
+    --text: #16241C;
+    --muted: #5E7268;
+    --accent: #1E8E5A;
+    --accent-dim: #BFE4CE;
+    --amber: #C77F1E;
+    --amber-dim: #F2E1C4;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,7 +25,7 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: 'Manrope', sans-serif;
     min-height: 100vh;
   }
 
@@ -43,7 +43,8 @@
   }
 
   .eyebrow {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
     font-size: 12px;
     letter-spacing: 0.12em;
     color: var(--accent);
@@ -56,11 +57,11 @@
 
   .eyebrow::before {
     content: "";
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     background: var(--accent);
     border-radius: 50%;
-    box-shadow: 0 0 0 3px var(--accent-dim);
+    box-shadow: 0 0 0 4px var(--accent-dim);
     animation: pulse 2.4s ease-in-out infinite;
   }
 
@@ -70,10 +71,10 @@
   }
 
   h1 {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 700;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
     font-size: clamp(28px, 4vw, 38px);
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
   }
 
   .sub {
@@ -85,7 +86,7 @@
   }
 
   .manifest-meta {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Manrope', sans-serif;
     font-size: 11px;
     color: var(--muted);
     position: absolute;
@@ -125,7 +126,7 @@
   }
 
   .code {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Manrope', sans-serif;
     font-size: 13px;
     color: var(--muted);
     letter-spacing: 0.02em;
@@ -148,7 +149,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Manrope', sans-serif;
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -162,14 +163,14 @@
     border-radius: 50%;
   }
 
-  .status.on { color: var(--accent); }
-  .status.on .dot { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+  .status.on { color: var(--accent); font-weight: 700; }
+  .status.on .dot { background: var(--accent); }
 
-  .status.building { color: var(--amber); }
-  .status.building .dot { background: var(--amber); box-shadow: 0 0 8px var(--amber); }
+  .status.building { color: var(--amber); font-weight: 700; }
+  .status.building .dot { background: var(--amber); }
 
   .arrow {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Manrope', sans-serif;
     opacity: 0;
     transform: translateX(-4px);
     transition: all 0.15s ease;
@@ -183,7 +184,7 @@
 
   footer {
     margin-top: 48px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Manrope', sans-serif;
     font-size: 11px;
     color: var(--muted);
     display: flex;
