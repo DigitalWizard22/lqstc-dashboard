@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LQSTC — Internal Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0E141B;
+    --surface: #161F29;
+    --surface-hover: #1C2733;
+    --line: #263241;
+    --text: #E6EAEF;
+    --muted: #7C8998;
+    --accent: #5FC9BA;
+    --accent-dim: #3A6E67;
+    --amber: #E0A458;
+    --amber-dim: #6B5432;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    min-height: 100vh;
+  }
+
+  .wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  header {
+    padding-bottom: 32px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px var(--accent-dim);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  h1 {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: clamp(28px, 4vw, 38px);
+    letter-spacing: -0.01em;
+  }
+
+  .sub {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 10px;
+    max-width: 46ch;
+    line-height: 1.5;
+  }
+
+  .manifest-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    position: absolute;
+    right: 0;
+    top: 4px;
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  .board {
+    margin-top: 8px;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 92px 1fr auto;
+    align-items: center;
+    gap: 20px;
+    padding: 26px 4px;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s ease, padding-left 0.15s ease;
+    position: relative;
+  }
+
+  .row.live { cursor: pointer; }
+
+  .row.live:hover {
+    background: var(--surface);
+    padding-left: 12px;
+  }
+
+  .row.disabled {
+    cursor: default;
+    opacity: 0.55;
+  }
+
+  .code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  .info h2 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .info p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+    max-width: 48ch;
+  }
+
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    justify-self: end;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+
+  .status.on { color: var(--accent); }
+  .status.on .dot { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+
+  .status.building { color: var(--amber); }
+  .status.building .dot { background: var(--amber); box-shadow: 0 0 8px var(--amber); }
+
+  .arrow {
+    font-family: 'JetBrains Mono', monospace;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all 0.15s ease;
+    color: var(--accent);
+  }
+
+  .row.live:hover .arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  footer {
+    margin-top: 48px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 560px) {
+    .row { grid-template-columns: 60px 1fr; }
+    .status { grid-column: 1 / -1; justify-self: start; margin-top: 4px; }
+    .manifest-meta { position: static; margin-top: 18px; text-align: left; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">System Status: Operational</div>
+      <h1>LQSTC // Internal Systems</h1>
+      <p class="sub">Manifest of tools built for Luzon Quick Serve Trading Corp. Select an entry to open the live application.</p>
+      <div class="manifest-meta">
+        DOC LQS-000<br>
+        REV <span id="rev-date"></span>
+      </div>
+    </header>
+
+    <div class="board" id="board"></div>
+
+    <footer>
+      <span>LQSTC INTERNAL USE ONLY</span>
+      <span id="entry-count"></span>
+    </footer>
+  </div>
+
+<script>
+  // ---- Edit this list to add, remove, or relink tools ----
+  const tools = [
+    {
+      code: "LQS-INV-01",
+      name: "Inventory — View Only",
+      desc: "Read-only stock view for quick lookups without edit access.",
+      url: "https://lqstc-inventory-tool-psi.vercel.app/inventory-view.html",
+      status: "live"
+    },
+    {
+      code: "LQS-PRC-02",
+      name: "Pricing Tool",
+      desc: "Bid pricing engine — cost-plus model with Bid to Win, Balanced, and High Margin strategies.",
+      url: "https://lqstc-pricing-tool.vercel.app/",
+      status: "live"
+    },
+    {
+      code: "LQS-CRM-03",
+      name: "Partner Directory",
+      desc: "CRM tracking partnered hospitals, clinics, and distributors, plus interaction history.",
+      url: "https://lqstc-partner-crm.vercel.app/",
+      status: "live"
+    }
+  ];
+  // ----------------------------------------------------------
+
+  const board = document.getElementById('board');
+
+  tools.forEach(t => {
+    const isLive = t.status === "live";
+    const el = document.createElement(isLive ? 'a' : 'div');
+    if (isLive) {
+      el.href = t.url;
+      el.target = "_blank";
+      el.rel = "noopener noreferrer";
+    }
+    el.className = `row ${isLive ? 'live' : 'disabled'}`;
+    el.innerHTML = `
+      <div class="code">${t.code}</div>
+      <div class="info">
+        <h2>${t.name}</h2>
+        <p>${t.desc}</p>
+      </div>
+      <div class="status ${isLive ? 'on' : 'building'}">
+        <span class="dot"></span>${isLive ? 'Live' : 'In Development'}
+      </div>
+      ${isLive ? '<span class="arrow">&nbsp;→</span>' : ''}
+    `;
+    board.appendChild(el);
+  });
+
+  document.getElementById('entry-count').textContent = `${tools.length} ENTRIES LOGGED`;
+  document.getElementById('rev-date').textContent = new Date().toISOString().slice(0,10);
+</script>
+</body>
+</html>
